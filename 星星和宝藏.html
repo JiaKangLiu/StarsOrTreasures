@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://jiketown.lalahaha.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#请回答 2020</title>
+<script src="./json.js.数据"></script>
+<style>
+* {
+	margin:0;
+	padding:0;
+}
+.enterSite-bd {
+	width:100%;
+	height:80px;
+	display:none;
+	position:fixed;
+	bottom:120px;
+	z-index:99999;
+}
+.enterSite-center {
+	width:220px;
+	display:block;
+	margin:50px auto;
+	text-align:center;
+	position:relative;
+}
+.enterSite-box {
+	background-color:rgb(243,243,243);
+	border:1px solid rgb(50,50,50);
+	border-radius:4px;
+}
+.enterSite-box p {
+	margin-top:20px;
+	margin-bottom:20px;
+	word-wrap:break-word;
+}
+.enterSite-close {
+	width:30px;
+	height:30px;
+	display:block;
+	border:2px solid rgb(50,50,50);
+	background-color:#fff;
+	border-radius:360px;
+	line-height:24px;
+	font-size:24px;
+	position:absolute;
+	z-index:10;
+	right:0;
+	top:0;
+	margin-right:-12px;
+	margin-top:-12px;
+}
+.enterSite-name {
+	font-size:20px;
+}
+.enterSite-button {
+	border:2px solid rgb(255,228,17);
+	border-radius:8px;
+	background-color:rgb(255,228,17);
+	padding:5px 12px;
+	font-size:18px;
+	font-weight:900;
+	color:rgb(50,50,50);
+	text-decoration:none;
+}
+.enterSite-button:visited {
+	color:rgb(50,50,50);
+}
+.enterSite-button:hover {
+	color:rgb(50,50,50);
+}
+.pageImg {
+	position:absolute;
+	width:100%;
+	z-index:1;
+}
+
+#imgCard{
+    width: 220px;
+    opacity: 0.3;
+    
+}
+@keyframes shine {
+	0% {
+	background-color:rgb(243,243,243);
+}
+25% {
+	background-color:rgb(243,243,243);
+}
+55% {
+	background-color:rgb(50,50,50);
+}
+100% {
+	background-color:rgb(243,243,243);
+}
+}.tips-area {
+	position:absolute;
+	border-radius:360px;
+	display:block;
+	z-index:999;
+}
+.tips {
+	border:1px solid rgb(50,50,50);
+	border-radius:360px;
+	display:block;
+	animation-name:shine;
+	animation-duration:1.5s;
+	animation-iteration-count:infinite;
+}
+</style>
+</head>
+<body>
+<div id="enterSite" class="enterSite-bd" style="display: none;">
+    <div id="enterSiteCenter" class="enterSite-center">
+        <div class="enterSite-box" background="">
+            <img id="imgCard" src="" alt="">
+            <a id="enterSiteClose" class="enterSite-close">x</a>
+            <p id="enterSiteName" class="enterSite-name">@大爷改滚去看书了</p>
+            <p>
+                <a id="enterSiteButton" class="enterSite-button" href="https://ljkang.cn" target="_blank">进入图片</a>
+            </p>
+        </div>
+    </div>
+</div>
+<div id="page"></div>
+<img id="pageImg" class="pageImg" src="https://z3.ax1x.com/2021/08/29/hGe3QO.png">
+
+<script>
+let pageImg =document.getElementById("pageImg");
+let page =document.getElementById("page");
+let enterSite ={};
+enterSite.ele =document.getElementById("enterSite");
+enterSite.jiyouName =document.getElementById("enterSiteName");
+enterSite.enterButton =document.getElementById("enterSiteButton");
+enterSite.closeButton =document.getElementById("enterSiteClose");
+//获取图片标签ID
+enterSite.img =document.getElementById("imgCard");
+
+enterSite.show =function(isShow) {
+    if (isShow) 
+    {enterSite.ele.style.display ="block";
+} else {
+    enterSite.ele.style.display ="none";
+}
+};
+enterSite.setEnter =function(jiyouName,href,image) {
+    enterSite.jiyouName.innerText ="#@" + jiyouName;
+    enterSite.enterButton.href =href;
+    enterSite.enterButton.target ="_blank";
+    //添加图片
+    enterSite.img.src =image;
+};
+enterSite.closeButton.addEventListener("click",e =>{
+    enterSite.show(false);
+});
+let pageImgOriginWidth =600;
+let tipsAreaWidth =50; //左右间距
+let tipsAreaHeight =50; //上下间距
+let tipsWidth =10; //圆点左右宽度
+let tipsHeight =10; //圆点上下宽度
+class Tips {
+    constructor(xOffset,yOffset,jiyouName,href,image) {
+        this.area =document.createElement("a");
+        this.area.classList.add("tips-area");
+        this.area.addEventListener("click",e =>{
+            enterSite.show(true);
+            enterSite.setEnter(jiyouName,href,image);
+        });
+        page.appendChild(this.area);
+        this.area.style.width =tipsAreaWidth + "px";
+        this.area.style.height =tipsAreaHeight + "px";
+        xOffset -=tipsAreaWidth / 2;
+        yOffset -=tipsAreaHeight / 2;
+        this.area.style.marginLeft =(xOffset / pageImgOriginWidth) *100 + "%";
+        this.area.style.marginTop =(yOffset / pageImgOriginWidth) *100 + "%";
+        this.tips =document.createElement("em");
+        this.tips.classList.add("tips");
+        this.area.appendChild(this.tips);
+        this.tips.style.width =tipsWidth + "px";
+        this.tips.style.height =tipsHeight + "px";
+        this.tips.style.marginLeft =tipsAreaWidth / 2 - tipsWidth / 2 + "px";
+        this.tips.style.marginTop =tipsAreaHeight / 2 - tipsHeight / 2 + "px";
+    }
+}
+ for (let i =0;i < jsonData.length;i +=1) {
+     let data =jsonData[i];
+     let tips =new Tips(data.x,data.y,data.name,data.url,data.img);
+     }
+</script>
+
+</body></html>
